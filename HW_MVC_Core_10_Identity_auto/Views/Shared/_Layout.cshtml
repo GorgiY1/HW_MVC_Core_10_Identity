@@ -1,0 +1,68 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - HW_MVC_Core_10_Identity_auto</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <link href="~/css/Style1.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="form-container">
+        <header>
+
+            <div class="menu">
+
+                <a asp-area="" asp-controller="Home" asp-action="Index">Identity Page</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                <partial name="_LoginPartial" />
+
+                @if (!SignInManager.IsSignedIn(User))
+                {
+                    <menu>
+                        <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
+
+
+                       
+                        <a asp-area="Identity" asp-page="/Account/Logout">LogOut</a>
+                    </menu>
+
+
+                }
+                else
+                {
+                    <a asp-area="Identity" asp-page="/Account/Register">Register</a>
+                    <a asp-area="Identity" asp-page="/Account/Login">Login</a>
+                }
+
+            </div>
+
+        </header>
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2024 - Identity<a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>
+
+
+
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
